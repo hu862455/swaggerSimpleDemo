@@ -1,5 +1,6 @@
 package com.hushuai.swagger.controller;
 
+import com.hushuai.swagger.constant.CommonEnum;
 import com.hushuai.swagger.dto.User;
 import com.hushuai.swagger.vo.RespBean;
 import io.swagger.annotations.Api;
@@ -37,8 +38,8 @@ public class UserController {
     )
     public RespBean addUser(String username, @RequestParam(required = true) String address) {
         RespBean respBean = new RespBean();
-        respBean.setSuccess(true);
-        respBean.setData(new User(username,address));
+        respBean.setCode(CommonEnum.SUCCESS.getResultCode());
+        respBean.setResult(new User(username,address));
         return respBean;
     }
 
@@ -48,6 +49,7 @@ public class UserController {
     public User getUserById(@PathVariable Integer id) {
         User user = new User();
         user.setId(id);
+        int i = 100 / 0;
         return user;
     }
     @PutMapping("/{id}")

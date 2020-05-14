@@ -1,5 +1,8 @@
 package com.hushuai.swagger.vo;
 
+import com.hushuai.swagger.constant.CommonEnum;
+import com.hushuai.swagger.excption.BaseErrorInfoInterface;
+
 /**
  * Created with IntelliJ IDEA.
  *
@@ -10,31 +13,90 @@ package com.hushuai.swagger.vo;
  */
 public class RespBean {
 
-    private String msg;
-    private Boolean success;
-    private Object data;
+    /**
+     * 响应代码
+     */
+    private String code;
 
-    public Boolean getSuccess() {
-        return success;
+    /**
+     * 响应消息
+     */
+    private String message;
+
+    /**
+     * 响应结果
+     */
+    private Object result;
+
+    public RespBean() {
+    }
+    /**
+     * 成功
+     * @param data
+     * @return
+     */
+    public static RespBean success(Object data) {
+        RespBean rb = new RespBean();
+        rb.setCode(CommonEnum.SUCCESS.getResultCode());
+        rb.setMessage(CommonEnum.SUCCESS.getResultMsg());
+        rb.setResult(data);
+        return rb;
     }
 
-    public void setSuccess(Boolean success) {
-        this.success = success;
+    /**
+     * 失败
+     */
+    public static RespBean error(BaseErrorInfoInterface errorInfo) {
+        RespBean rb = new RespBean();
+        rb.setCode(errorInfo.getResultCode());
+        rb.setMessage(errorInfo.getResultMsg());
+        rb.setResult(null);
+        return rb;
     }
 
-    public Object getData() {
-        return data;
+    /**
+     * 失败
+     */
+    public static RespBean error(String code, String message) {
+        RespBean rb = new RespBean();
+        rb.setCode(code);
+        rb.setMessage(message);
+        rb.setResult(null);
+        return rb;
     }
 
-    public void setData(Object data) {
-        this.data = data;
+    /**
+     * 失败
+     */
+    public static RespBean error( String message) {
+        RespBean rb = new RespBean();
+        rb.setCode("-1");
+        rb.setMessage(message);
+        rb.setResult(null);
+        return rb;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getCode() {
+        return code;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public Object getResult() {
+        return result;
+    }
+
+    public void setResult(Object result) {
+        this.result = result;
     }
 }

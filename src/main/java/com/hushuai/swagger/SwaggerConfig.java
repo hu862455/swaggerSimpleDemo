@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -27,12 +29,12 @@ import java.util.List;
  * @Author: shuaihu2
  * @Date: 2020/5/14
  * @Interface: SwaggerConfig
- * @Description:
+ * @Description: swagger2的配置类
  */
 @Configuration
 @EnableSwagger2
 @Profile("dev")
-public class SwaggerConfig {
+public class SwaggerConfig implements WebMvcConfigurer {
     @Value("${swagger.title}")
     private String title;
 
@@ -96,5 +98,21 @@ public class SwaggerConfig {
                 .contact(new Contact(name, url, email))
                 .version(version)
                 .build();
+    }
+
+    /**
+     * @Description: 静态资源放出
+     * @params: [registry]
+     * @return: void
+     * @exception:
+     * @methodName: addResourceHandlers
+     * @updateDate: 2020/5/14 18:21
+     * @updateAuthor: shuaihu2
+     */
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("doc.html").addResourceLocations("classpath:/META-INF/resources/");
+        registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 }
