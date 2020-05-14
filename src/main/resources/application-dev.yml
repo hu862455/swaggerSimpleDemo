@@ -1,0 +1,10 @@
+# Swagger界面内容配置
+swagger:
+  title: Swagger API接口文档
+  description: Api Documentation
+  version: 1.0.0
+  termsOfServiceUrl: https://www.baidu.com
+  contact:
+    name: hushuai
+    url: https://www.baidu.com
+    email: 15927030754@163.com
