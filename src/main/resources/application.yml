@@ -5,3 +5,9 @@ server:
   port: 8080
   servlet:
     context-path: /swagger
+    session:
+      timeout: 20m # session超时时间
+#      persistent: false # session是否做持久化操作
+#      store-dir: # session持久化目录
+  error:
+    path: /error
